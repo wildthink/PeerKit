@@ -2,7 +2,8 @@ Pod::Spec.new do |s|
   s.name = 'PeerKit'
   s.version = '3.0.1'
   s.summary = 'Swift framework for building event-driven, zero-config Multipeer Connectivity apps'
-  s.authors = { 'Jason Jobe' => github@jasonjobe.com', 'JP Simard' => 'jp@jpsim.com' }
+  #s.authors = { 'Jason Jobe' => github@jasonjobe.com', 'JP Simard' => 'jp@jpsim.com' }
+  s.authors = { 'Jason Jobe' => 'github@jasonjobe.com', 'JP Simard' => 'jp@jpsim.com' }
   s.license = 'MIT'
   s.homepage = 'https://github.com/wildthink/PeerKit'
   #s.social_media_url = 'https://twitter.com/simjp'
