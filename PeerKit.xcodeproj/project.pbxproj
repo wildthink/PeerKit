@@ -59,6 +59,7 @@
 
 /* Begin PBXFileReference section */
 		D0B0AE9B1E1F564400DADCFA /* PeerOne.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeerOne.swift; sourceTree = "<group>"; };
+		D0B0AEA01E1FE9A600DADCFA /* PeerKit.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PeerKit.podspec; sourceTree = "<group>"; };
 		E86EC4421AB734F5001A7734 /* PeerKit-iOS-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PeerKit-iOS-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E86EC4521AB73597001A7734 /* PeerKit-OSX-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PeerKit-OSX-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E89FD6C01A0C3CDC00C2FEF7 /* PeerKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PeerKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -111,6 +112,7 @@
 		E89FD6B61A0C3CDC00C2FEF7 = {
 			isa = PBXGroup;
 			children = (
+				D0B0AEA01E1FE9A600DADCFA /* PeerKit.podspec */,
 				E89FD6C21A0C3CDC00C2FEF7 /* PeerKit */,
 				E89FD6CF1A0C3CDC00C2FEF7 /* PeerKitTests */,
 				E89FD6C11A0C3CDC00C2FEF7 /* Products */,

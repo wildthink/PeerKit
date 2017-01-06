@@ -16,8 +16,8 @@ Pod::Spec.new do |s|
   s.source_files = 'PeerKit/*.swift'
   s.requires_arc = true
 
-#  s.dependency 'CocoaAsyncSocket', '>= 7.4.0'
-#  s.dependency 'HHServices', '>= 2.0'
-#  s.dependency 'xaphodObjCUtils'
+  s.dependency 'CocoaAsyncSocket', '>= 7.4.0'
+  s.dependency 'HHServices', '>= 2.0'
+  s.dependency 'xaphodObjCUtils'
 
 end
