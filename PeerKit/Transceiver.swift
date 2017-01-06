@@ -15,6 +15,14 @@ enum TransceiverMode {
 
 public class Transceiver: SessionDelegate {
 
+    public var onConnecting: PeerBlock?
+    public var onConnect: PeerBlock?
+    public var onDisconnect: PeerBlock?
+    public var onEvent: EventBlock?
+    public var onEventObject: ObjectBlock?
+    public var onFinishReceivingResource: ResourceBlock?
+    public var eventBlocks = [String: ObjectBlock]()
+
     var transceiverMode = TransceiverMode.Both
     let session: Session
     let advertiser: Advertiser
@@ -51,22 +59,57 @@ public class Transceiver: SessionDelegate {
     }
 
     public func connecting(myPeerID: MCPeerID, toPeer peer: MCPeerID) {
-        didConnecting(myPeerID: myPeerID, peer: peer)
+        onConnecting?(myPeerID, peer)
     }
 
     public func connected(myPeerID: MCPeerID, toPeer peer: MCPeerID) {
-        didConnect(myPeerID: myPeerID, peer: peer)
+        onConnect?(myPeerID, peer)
     }
 
     public func disconnected(myPeerID: MCPeerID, fromPeer peer: MCPeerID) {
-        didDisconnect(myPeerID: myPeerID, peer: peer)
+        onDisconnect?(myPeerID, peer)
+    }
+
+    public func sendEvent(_ event: String, object: AnyObject? = nil, toPeers peers: [MCPeerID]? = nil) {
+        
+        let peers = peers ?? session.mcSession.connectedPeers
+        guard !peers.isEmpty else { return }
+        
+        var rootObject: [String: AnyObject] = ["event": event as AnyObject]
+        
+        if let object: AnyObject = object {
+            rootObject["object"] = object
+        }
+        
+        let data = NSKeyedArchiver.archivedData(withRootObject: rootObject)
+        
+        do {
+            try session.mcSession.send(data, toPeers: peers, with: .reliable)
+        } catch _ {
+        }
+    }
+    
+    public func sendResourceAtURL(_ resourceURL: URL,
+                                  withName resourceName: String,
+                                  toPeers peers: [MCPeerID]? = nil,
+                                  withCompletionHandler completionHandler: ((Error?) -> Void)?) -> [Progress?]? {
+        
+        let peers = peers ?? session.mcSession.connectedPeers
+//        if let session = session {
+            return peers.map { peerID in
+                return session.mcSession.sendResource(at: resourceURL, withName: resourceName, toPeer: peerID, withCompletionHandler: completionHandler)
+//            }
+        }
+        return nil
     }
 
     public func receivedData(myPeerID: MCPeerID, data: Data, fromPeer peer: MCPeerID) {
-        didReceiveData(data, fromPeer: peer)
+//        onEventObject?(data, peer)
     }
 
     public func finishReceivingResource(myPeerID: MCPeerID, resourceName: String, fromPeer peer: MCPeerID, atURL localURL: URL) {
-        didFinishReceivingResource(myPeerID: myPeerID, resourceName: resourceName, fromPeer: peer, atURL: localURL)
+        onFinishReceivingResource?(myPeerID, resourceName, peer, localURL)
     }
 }
+
+
